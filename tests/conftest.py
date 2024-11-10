@@ -18,15 +18,15 @@ def driver(request):
         case 'Chrome':
             options = webdriver.ChromeOptions()
             if headless:
-                options.add_argument("--headless=new")
+                options.add_argument('--headless=new')
 
             my_driver = webdriver.Chrome(options=options)
 
         case 'Firefox':
             options = webdriver.FirefoxOptions()
             if headless:
-                options.add_argument("-headless")
-                
+                options.add_argument('-headless')
+
             my_driver = webdriver.Firefox(options=options)
 
         case _:
@@ -43,5 +43,5 @@ def pytest_addoption(parser):
         '--browser', action='store', default='Chrome', help='Web browser for test execution [ Chrome | Firefox ]'
     )
     parser.addoption(
-        '--headless', action='store', default=True, help='Web browser headless mode [ True | False ]'
+        '--headless', action='store', default=False, help='Web browser headless mode [ True | False ]'
     )
