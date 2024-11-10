@@ -12,3 +12,8 @@ reports/*
 # other #
 .DS_Store
 .DS_Store/*
+
+# Python #
+**/__pycache__/**/*.pyc
+__pycache__/**/*.pyc
+**/__pycache__/*.pyc

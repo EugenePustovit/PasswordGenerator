@@ -13,6 +13,7 @@ class TestPasswordGenerator:
     __error_msg_enabled_options = 'Enabled options different from expected'
     __error_msg_wrong_pass_length_displayed = 'Wrong password length displayed on the page'
 
+    @pytest.mark.test
     @pytest.mark.positive
     def test_default_password(self, driver):
         password_generator = PasswordGeneratorPage(driver)

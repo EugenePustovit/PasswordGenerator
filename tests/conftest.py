@@ -7,15 +7,28 @@ from selenium import webdriver
 def driver(request):
 
     browser = request.config.getoption('--browser').capitalize()
+    headless = request.config.getoption('--headless')
+
     # browser = request.param
     print(f'Creating {browser} driver')
+    print(f'Headless mode { 'enabled' if headless else 'disabled' }')
 
     # my_driver = None
     match browser:
         case 'Chrome':
-            my_driver = webdriver.Chrome()
+            options = webdriver.ChromeOptions()
+            if headless:
+                options.add_argument("--headless=new")
+
+            my_driver = webdriver.Chrome(options=options)
+
         case 'Firefox':
-            my_driver = webdriver.Firefox()
+            options = webdriver.FirefoxOptions()
+            if headless:
+                options.add_argument("-headless")
+                
+            my_driver = webdriver.Firefox(options=options)
+
         case _:
             raise TypeError(f'Unknown browser {browser}. Available browsers for testing: Chrome, Firefox')
 
@@ -27,5 +40,8 @@ def driver(request):
 
 def pytest_addoption(parser):
     parser.addoption(
-        '--browser', action='store', default='Chrome', help='Web browser for test execution [Chrome | Firefox | Safari]'
+        '--browser', action='store', default='Chrome', help='Web browser for test execution [ Chrome | Firefox ]'
+    )
+    parser.addoption(
+        '--headless', action='store', default=True, help='Web browser headless mode [ True | False ]'
     )
