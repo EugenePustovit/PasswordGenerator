@@ -6,7 +6,7 @@ class PasswordConfig:
     __regex = {
         'Lowercase': 'a-z',
         'Uppercase': 'A-Z',
-        'Numbers': '0-9',
+        'Numbers': '\d',
         'Symbols': '_\W\D'
     }
     options = {
