@@ -23,6 +23,7 @@ class PasswordGeneratorPage(BasePage):
     __set_option_uppercase_checkbox_locator = By.XPATH, '//label[@for="option-uppercase"]'
     __set_option_numbers_checkbox_locator = By.XPATH, '//label[@for="option-numbers"]'
     __set_option_symbols_checkbox_locator = By.XPATH, '//label[@for="option-symbols"]'
+    __copy_password_button_locator = By.XPATH, '//button[@title="Copy Password"]'
 
 
     def __init__(self, driver: WebDriver):
@@ -101,3 +102,12 @@ class PasswordGeneratorPage(BasePage):
         self.numbers_enabled = numbers
         self.uppercase_enabled = uppercase
         self.lowercase_enabled = lowercase
+
+    def copy_password(self):
+        self._click(self.__copy_password_button_locator)
+
+    def is_text_present(self, text: str) -> bool:
+        return self._wait_until_text_is_present(self.__copy_password_button_locator, text)
+
+
+

@@ -38,3 +38,7 @@ class BasePage:
 
     def _is_checkbox_selected(self, locator: tuple[str, str], timeout: int = 10) -> bool:
         return self._wait_until_element_is_present(locator, timeout).is_selected()
+
+    def _wait_until_text_is_present(self, locator: tuple[str, str], text: str, timeout: int = 10) -> bool:
+        wait = WebDriverWait(self._driver, timeout)
+        return wait.until(ec.text_to_be_present_in_element(locator, text))

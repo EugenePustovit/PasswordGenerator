@@ -1,3 +1,5 @@
+import time
+
 import pytest
 
 from helper.password_config import PasswordConfig
@@ -100,3 +102,16 @@ class TestPasswordGenerator:
 
         assert new_pass_cfg.length == exp_length, self.__error_msg_pass_length
         assert new_pass_cfg.is_match_length(), self.__error_msg_pass_length
+
+    @pytest.mark.test
+    def test_copy_password_via_button(self, driver):
+        expected_text = 'Copied to clipboard!'
+        original_text = 'Copy Password'
+
+        password_generator = PasswordGeneratorPage(driver)
+        password_generator.load()
+
+        password_generator.copy_password()
+
+        assert password_generator.is_text_present(expected_text)
+        assert password_generator.is_text_present(original_text)
